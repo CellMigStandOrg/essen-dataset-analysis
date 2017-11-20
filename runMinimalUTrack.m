@@ -1,5 +1,5 @@
 clear 
-nPoints = 20;
+nPoints = 25;
 sizeT = 20;
 
 % Create an initial set of points, velocity and directions

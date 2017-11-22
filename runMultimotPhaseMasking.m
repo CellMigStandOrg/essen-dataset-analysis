@@ -1,7 +1,7 @@
-function props = runMultimotPhaseMasking(session, imageId, saveResults)
+function [tracksFinal, props] = runMultimotPhaseMasking(session, imageId)
 tic;
 
-%[saveResults.filename, saveResults.dir] = uiputfile('*.mat','Save Results','tracks.mat');
+[saveResults.filename, saveResults.dir] = uiputfile('*.mat','Save Results','tracks.mat');
 theImage = getImages(session, imageId);
 pixels = theImage.getPrimaryPixels;
 numT = pixels.getSizeT.getValue;

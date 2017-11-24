@@ -60,7 +60,7 @@ costMatrices(2).funcName = 'costMatRandomDirectedSwitchingMotionCloseGaps';
 %needed all the time
 parameters.linearMotion = 0; %use linear motion Kalman filter.
 
-parameters.minSearchRadius = 2; %minimum allowed search radius.
+parameters.minSearchRadius = 18; %minimum allowed search radius.
 parameters.maxSearchRadius = 2; %maximum allowed search radius.
 parameters.brownStdMult = 3*ones(gapCloseParam.timeWindow,1); %multiplication factor to calculate Brownian search radius from standard deviation.
 

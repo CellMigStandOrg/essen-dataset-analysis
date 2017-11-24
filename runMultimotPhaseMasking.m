@@ -19,6 +19,8 @@ movieInfo = uTrackMovieInfoFromProps(props);
 
 tracksFinal = trackGeneral(saveResults, movieInfo);
 
-plotTracks2D(tracksFinal);
+%uTrackToCMSO(tracksFinal, imageId, saveResults);
+
+%plotTracks2D(tracksFinal);
 
 toc;

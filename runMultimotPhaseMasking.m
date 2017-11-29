@@ -19,7 +19,7 @@ movieInfo = uTrackMovieInfoFromProps(props);
 
 tracksFinal = trackGeneral(saveResults, movieInfo);
 
-%uTrackToCMSO(tracksFinal, imageId, saveResults);
+uTrackToCMSO(tracksFinal, imageId, saveResults);
 
 %plotTracks2D(tracksFinal);
 

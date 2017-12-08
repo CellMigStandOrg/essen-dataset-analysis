@@ -1,8 +1,5 @@
 function uTrackToCMSO(tracks, imageId, saveResults)
 
-%Create JSON
-createCMSOJSON(imageId, saveResults)
-
 numTracks = numel(tracks);
 
 %Create variables
@@ -58,3 +55,5 @@ tracksTbl = table(cmso_track_id, cmso_link_id);
 writetable(objectsTbl, [saveResults.dir 'objects_' num2str(imageId) '.csv']);
 writetable(linksTbl, [saveResults.dir 'links_' num2str(imageId) '.csv']);
 writetable(tracksTbl, [saveResults.dir 'tracks_' num2str(imageId) '.csv']);
+%Create JSON
+createCMSOJSON(imageId, saveResults, 1);

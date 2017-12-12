@@ -21,6 +21,10 @@ tracksFinal = trackGeneral(saveResults, movieInfo);
 
 uTrackToCMSO(tracksFinal, imageId, saveResults);
 
+zipDpkg(saveResults, imageId);
+
+attachCMSODatapackage(session, imageId, saveResults);
+
 %plotTracks2D(tracksFinal);
 
 toc;

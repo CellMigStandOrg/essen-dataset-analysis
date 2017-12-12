@@ -14,12 +14,15 @@ for thisRes = 1:numRes
     thisColName = CMSOjson.resources(thisRes).name;
     if contains(thisColName, 'objects')
         objectsTableIdx = thisRes;
+        objects.fileName = CMSOjson.resources(thisRes).path;
     end
     if contains(thisColName, 'links')
         linksTableIdx = thisRes;
+        links.fileName = CMSOjson.resources(thisRes).path;
     end
     if contains(thisColName, 'tracks')
         tracksTableIdx = thisRes;
+        tracks.fileName = CMSOjson.resources(thisRes).path;
     end
 end
 
@@ -29,7 +32,7 @@ numCols = numel(CMSOjson.resources(objectsTableIdx).schema.fields);
 
 for thisCol = 1:numCols
     thisColName = CMSOjson.resources(objectsTableIdx).schema.fields{thisCol}.name;
-    if contains(thisColName, 'objects')
+    if contains(thisColName, 'object')
         objects.objectIdIdx = thisCol;
     end
     if contains(thisColName, 'frame')
@@ -48,7 +51,7 @@ end
 numCols = numel(CMSOjson.resources(linksTableIdx).schema.fields);
 
 for thisCol = 1:numCols
-    thisColName = CMSOjson.resources(linksTableIdx).schema.fields{thisCol}.name;
+    thisColName = CMSOjson.resources(linksTableIdx).schema.fields(thisCol).name;
     if contains(thisColName, 'link')
         links.linkIdIdx = thisCol;
     end
@@ -63,7 +66,7 @@ if ~isempty(tracksTableIdx)
     numCols = numel(CMSOjson.resources(tracksTableIdx).schema.fields);
     
     for thisCol = 1:numCols
-        thisColName = CMSOjson.resources(tracksTableIdx).schema.fields{thisCol}.name;
+        thisColName = CMSOjson.resources(tracksTableIdx).schema.fields(thisCol).name;
         if contains(thisColName, 'track')
             tracks.trackIdIdx = thisCol;
         end

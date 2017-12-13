@@ -13,9 +13,9 @@ for thisLink = 1:numUniqueLinks
     
     linksSubset = linksData(rows,:);
     track = innerjoin(objectsData, linksSubset);
-    [thisMSD, totalDistance] = trackingMSD(imageObj, track);
+    [thisMSD, totalDistanceThisLink] = trackingMSD(imageObj, track);
     MSD = [MSD; thisMSD];
-    totalDistance = [totalDistance; totalDistance];
+    totalDistance = [totalDistance; totalDistanceThisLink];
     trackLength = [trackLength; numel(rows(rows==1))];
     linkId = [linkId; thisLinkId];
 end

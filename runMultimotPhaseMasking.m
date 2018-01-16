@@ -1,13 +1,13 @@
-function [tracksFinal, props] = runMultimotPhaseMasking(session, imageId)
+function [tracksFinal, props] = runMultimotPhaseMasking(session, imageId, saveResults, varLen, doContour)
 tic;
 
-[saveResults.filename, saveResults.dir] = uiputfile('*.mat','Save Results','tracks.mat');
+%[saveResults.filename, saveResults.dir] = uiputfile('*.mat','Save Results','tracks.mat');
 theImage = getImages(session, imageId);
 pixels = theImage.getPrimaryPixels;
 numT = pixels.getSizeT.getValue;
 for thisT = 1:numT
     plane = getPlane(session, imageId, 0, 0, thisT-1);
-    [mask, ~] = multimotPhaseMaskingIdx(plane, 1, 8);
+    [mask, ~] = multimotPhaseMaskingIdx(plane, 1, varLen, doContour);
     [~, props{thisT}] = multimotLabelCells(mask);
     
     

@@ -1,20 +1,18 @@
-function [maskBWL, props] = multimotLabelCells(mask)
+function finalProps = multimotLabelCells(mask)
 
-maskBWL = bwlabel(mask);
-props = regionprops(maskBWL, 'Area', 'ConvexImage');
+props = regionprops(mask, 'Area', 'Centroid');
+finalProps = struct;
+counter = 1;
 
 numObj = length(props);
 
 for thisObj = 1:numObj
-    %Compare Area to ConvexHull
-    convImg = props(thisObj).ConvexImage;
     objArea = props(thisObj).Area;
-    %relSize(thisObj) = objArea/sum(sum(convImg));
-    if objArea < 50
-        maskBWL(maskBWL == thisObj) = 0;
+    
+    if objArea > 50        
+        finalProps(counter).Area = props(thisObj).Area;
+        finalProps(counter).Centroid = props(thisObj).Centroid;
+        counter = counter + 1;
     end
 end
-
-maskBWL = bwlabel(maskBWL);
-props = regionprops(maskBWL, 'Area', 'ConvexImage', 'BoundingBox', 'Centroid');
 

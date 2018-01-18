@@ -7,8 +7,8 @@ pixels = theImage.getPrimaryPixels;
 numT = pixels.getSizeT.getValue;
 for thisT = 1:numT
     plane = getPlane(session, imageId, 0, 0, thisT-1);
-    [mask, ~] = multimotPhaseMaskingIdx(plane, 1, varLen, doContour);
-    [~, props{thisT}] = multimotLabelCells(mask);
+    mask = multimotPhaseMaskingIdx(plane, 1, varLen, doContour);
+    props{thisT} = multimotLabelCells(mask);
     
     
     %Store label masks for tracking?

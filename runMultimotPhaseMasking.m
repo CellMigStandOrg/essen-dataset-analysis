@@ -5,6 +5,9 @@ tic;
 theImage = getImages(session, imageId);
 pixels = theImage.getPrimaryPixels;
 numT = pixels.getSizeT.getValue;
+
+%varLen = optimiseVarLen(session, imageId);
+
 for thisT = 1:numT
     plane = getPlane(session, imageId, 0, 0, thisT-1);
     mask = multimotPhaseMaskingIdx(plane, 1, varLen, doContour);

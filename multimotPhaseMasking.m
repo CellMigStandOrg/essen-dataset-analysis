@@ -1,4 +1,4 @@
-function [mask, planeVar] = multimotPhaseMasking(plane, do45, varLen)
+function mask = multimotPhaseMasking(plane, do45, varLen, doContour)
 
 plane = double(plane);
 [sy, sx] = size(plane);
@@ -43,11 +43,19 @@ else
     planeVar = planeVar1 + planeVar2;
 end
 
-[~, contourObj] = contour(planeVar, 10);
-drawnow;
-minContourLine = contourObj.LevelList(1);
-
-mask = zeros(size(plane));
-mask(planeVar > minContourLine) = 1;
-mask = imfill(mask, 'holes');
-mask = logical(mask);
+if doContour
+    [~, contourObj] = contour(planeVar, 10);
+    drawnow;
+    minContourLine = contourObj.LevelList(1);
+    
+    mask = zeros(size(plane));
+    mask(planeVar > minContourLine) = 1;
+    mask = imfill(mask, 'holes');
+    mask = logical(mask);
+else
+    se = strel('diamond', 3);
+    planeVarEdge = edge(planeVar);
+    planeVarEdgeClose = imclose(planeVarEdge, se);
+    planeVarEdgeCloseFill = imfill(planeVarEdgeClose, 'holes');
+    mask = planeVarEdgeCloseFill;
+end

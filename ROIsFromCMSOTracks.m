@@ -1,4 +1,4 @@
-function ROIsFromCMSOTracks(session, imageId, objectsData, linksData)
+ function ROIsFromCMSOTracks(session, imageId, objectsData, linksData)
 
 iUpdate = session.getUpdateService();
 imageObj = getImages(session, imageId);
@@ -21,10 +21,18 @@ for thisTrack = 1:numTracks
        thisObj = theseCMSOobjs(objCounter);
        %nextObj = theseCMSOobjs(objCounter+1);
        TVec = [TVec objectsData.cmso_frame_id(objectsData.cmso_object_id==thisObj)];
-       xCoords = [xCoords round(objectsData.cmso_x_coord(objectsData.cmso_object_id==thisObj))];
-       %xCoord2 = round(objectsData.cmso_x_coord(objectsData.cmso_object_id==nextObj));
-       yCoords = [yCoords round(objectsData.cmso_y_coord(objectsData.cmso_object_id==thisObj))];
-       %yCoord2 = round(objectsData.cmso_y_coord(objectsData.cmso_object_id==nextObj));
+       thisXCoord = round(objectsData.cmso_x_coord(objectsData.cmso_object_id==thisObj));
+       if isnan(thiXCoord)
+           thisXCoord = xCoords(end);
+       end
+       xCoords = [xCoords thisXCoord];
+       
+       thisYCoord = round(objectsData.cmso_y_coord(objectsData.cmso_object_id==thisObj));
+       if isnan(thisYCoord)
+           thisYCoord = yCoords(end);
+       end
+       yCoords = [yCoords thisYCoord];
+       
        if sum(ismember(objectsData.Properties.VariableNames, 'cmso_z_coord'))
            zCoord = round(objectsData.cmso_z_coord(objectsData.cmso_object_id==thisObj));
        else

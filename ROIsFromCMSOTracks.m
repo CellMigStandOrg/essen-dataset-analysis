@@ -1,4 +1,4 @@
- function ROIsFromCMSOTracks(session, imageId, objectsData, linksData)
+function ROIsFromCMSOTracks(session, imageId, objectsData, linksData)
 
 iUpdate = session.getUpdateService();
 imageObj = getImages(session, imageId);
